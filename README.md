@@ -1,9 +1,9 @@
 ## Object-Oriented Programming 1
 
-The code was written during EOM's labs using `repl.it` service.
+The code was written during EOM's labs using `repl.it` environment.
 Semester 4, year 2021.
 
-### Useful utilities
+### Useful utilities:
 
 `Makefile`:
 ```make

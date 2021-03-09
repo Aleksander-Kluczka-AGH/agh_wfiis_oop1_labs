@@ -13,7 +13,7 @@ MyArray::MyArray(const int size)
 ar(new int[size]),
 length(size)
 {
-    for(unsigned it = 0; it < size; it++)
+    for(unsigned it = 0u; it < size; it++)
         this->ar[it] = 0;
 }
 
@@ -21,28 +21,23 @@ MyArray::MyArray(const MyArray &copy)
 :
 length(copy.length)
 {
-    if(nullptr != this->ar)
-        this->pop();
     this->ar = new int[this->length];
-    for(unsigned it = 0u; it < copy.size(); it++)
-    {
-        this->ar[it] = copy.ar[it];
-    }
+    std::copy(copy.ar, copy.ar+copy.length, this->ar);
 }
 
 MyArray::MyArray(MyArray &&source)
+:
+ar(std::__exchange(source.ar, nullptr)),
+length(std::move(source.length))
 {
-    if(nullptr != this->ar)
-        this->pop();
-    this->ar = std::__exchange(source.ar, nullptr);
-    this->length = std::move(source.length);
+
 }
 
 MyArray::~MyArray()
 {
     if(this->ar != nullptr)
     {
-        for(unsigned it = 0; it < this->length; it++)
+        for(unsigned it = 0u; it < this->length; it++)
             this->ar[it] = 0;
         
         delete[] this->ar;
@@ -60,7 +55,7 @@ void MyArray::print(std::string text) const
     }
 
     std::cout << text << " = [ ";
-    for(unsigned it = 0; it < this->length; it++)
+    for(unsigned it = 0u; it < this->length; it++)
     {
         std::cout << this->ar[it] << " ";
     }
@@ -74,18 +69,28 @@ int MyArray::size() const
 
 int &MyArray::operator[] (unsigned index)
 {
-    return this->ar[index];
+    if(this->ar != nullptr)
+        return this->ar[index];
+    else
+    {
+        std::terminate();
+    }
 }
 
-int MyArray::operator[] (unsigned index) const //tylko do pomocy w pop()
+const int MyArray::operator[] (unsigned index) const //tylko do pomocy w pop()
 {
-    return this->ar[index];
+    if(this->ar != nullptr)
+        return this->ar[index];
+    else
+    {
+        std::terminate();
+    }
 }
 
 std::ostream &operator<<(std::ostream &str, const MyArray &target)
 {
-    str << "op<< [ ";
-    for(unsigned it = 0; it < target.size(); it++)
+    str << "\b\b\b\b\b\bop<< [ ";
+    for(unsigned it = 0u; it < target.size(); it++)
     {
         str <<target[it] << " ";
     }
@@ -95,35 +100,27 @@ std::ostream &operator<<(std::ostream &str, const MyArray &target)
 
 void MyArray::operator++()
 {
-    for(unsigned it = 0; it < this->length; it++)
+    if(nullptr == this->ar)
+    {
+        std::cout << "Tablica pusta, nie ma czego inkrementowac!" << std::endl;
+        std::terminate();
+    }
+    for(unsigned it = 0u; it < this->length; it++)
     {
         this->ar[it]++;
     }
 }
 
-MyArray MyArray::operator=(const MyArray &copy) const
+const MyArray &MyArray::operator=(const MyArray &input)
 {
-    MyArray result(copy);
-    return result;
-}
-
-MyArray &MyArray::operator=(MyArray &&source)
-{
-    this->pop();
-    this->ar = std::__exchange(source.ar, nullptr);
-    this->length = std::move(source.length);
-    return *this;
-}
-
-void MyArray::pop()
-{
-    if(nullptr != this->ar)
+    if(this == &input)
+        return *this;
+    else
     {
-        for(unsigned it = 0; it < this->length; it++)
-        {
-            this->ar[it] = 0;
-        }
         delete[] this->ar;
+        this->length = input.length;
+        this->ar = new int[this->length];
+        std::copy(input.ar, input.ar+input.length, this->ar);
+        return *this;
     }
-    this->length = 0u;
 }

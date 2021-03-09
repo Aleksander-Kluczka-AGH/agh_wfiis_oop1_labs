@@ -42,7 +42,7 @@ public:
      * @param indeks elementu tablicy
      * @return wartosc elementu w tym indeksie
      */
-    int operator[] (unsigned index) const;
+    const int operator[] (unsigned index) const;
     /** przeladowanie operatora wypisania
      * @param stream do ktorego wypisywana jest zawartosc
      * @param obiekt do wypisania
@@ -52,25 +52,16 @@ public:
     /** przeladowanie operatora inkrementacji
      */
     void operator++();
-    /** przeladowanie operatora przypisania z kopiowaniem
-     * @param kopiowana tablica
-     * @return kopia podanej tablicy
+    /** przeladowanie operatora przypisania
+     * @param obiekt przypisywany
+     * @return obiekt przypisany
      */
-    MyArray operator=(const MyArray &copy) const;
-    /** przeladowanie operatora przypisania z przenoszeniem
-     * @param zrodlo z ktorego wykonywane jest przenoszenie
-     * @return przeniesiony obiekt
-     */
-    MyArray &operator=(MyArray &&source);
+    const MyArray &operator=(const MyArray &input);
 
 protected:
 
 
 private:
-    /** pomocnicza metoda zwalniajaca pamiec oryginalnej tablicy
-     */
-    void pop();
-
     int *ar;
     unsigned length;
 };
