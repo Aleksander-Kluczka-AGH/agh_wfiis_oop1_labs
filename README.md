@@ -1,10 +1,9 @@
 ## Object-Oriented Programming 1
 
-The code was written during EOM's labs using `repl.it` environment.
+The code was written during EOM's labs using `repl.it` environment.  
 Semester 4, year 2021.
 
 ### Useful utilities:
-
 `Makefile`:
 ```make
 CXX = g++
@@ -29,8 +28,8 @@ check:
 
 .PHONY: all clean run check
 ```
-
-`CMakeLists.txt`
+  
+`CMakeLists.txt`:
 ```cmake
 cmake_minimum_required(VERSION 3.1)
 project(CPPCMAKE)
