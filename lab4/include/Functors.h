@@ -12,7 +12,7 @@ class DivisibleBy
 
     /** Destruktor
      */
-    ~DivisibleBy() {}
+    ~DivisibleBy() = default;
 
     /** Przeladowanie operatora (), zeby plynnie stosowac funktor jako filtr
      * @param licznik w licznik%mianownik == 0

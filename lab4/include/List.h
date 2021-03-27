@@ -10,13 +10,6 @@
 class List
 {
     public:
-    /** Konstruktor domyslny
-     */
-    List();
-    /** Destruktor
-     */
-    ~List();
-
     /** Dodawanie elementu val do listy
      * @param dodawany element
      */

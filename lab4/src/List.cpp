@@ -1,18 +1,5 @@
 #include "../include/List.h"
 
-List::List()
-:
-data({})
-{
-
-}
-
-List::~List()
-{
-    if(!this->data.empty())
-        this->data.clear();
-}
-
 void List::insert(int val)
 {
     this->data.push_back(val);

@@ -5,18 +5,6 @@
 class FilterCriteria
 {
     public:
-    /** Konstruktor domyslny
-     */
-    FilterCriteria() : funs({}) {}
-
-    /** Destruktor
-     */
-    ~FilterCriteria()
-    {
-        if(!this->funs.empty())
-            this->funs.clear();
-    }
-
     /** Dodawanie do listy funktora
      * @param funktor filtrujacy typu bool(int)
      */
