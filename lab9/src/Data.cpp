@@ -6,11 +6,6 @@ name(name),
 values(values)
 { }
 
-Data::~Data()
-{
-    this->values.clear();
-}
-
 void Data::print() const
 {
     std::cout << std::setw(6) << this->name << " ";

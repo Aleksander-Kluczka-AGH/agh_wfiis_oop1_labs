@@ -34,7 +34,8 @@ private:
 const Sum sumData(const Data &data)
 {
     Sum sum;
-    std::for_each(data.values.begin(), data.values.end(),
-            [&sum](double result){ return sum(result); });
+    sum(std::accumulate(data.values.begin(), 
+    					data.values.end(),
+    					0.0));
     return sum;
 }

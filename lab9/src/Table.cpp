@@ -23,21 +23,26 @@ Table Table::sort(unsigned column)
     
     if(column > minCount-1u)
     {
-        std::cout << "Indkes " << column << " nieprawidlowy!" << std::endl;
+        std::cout << "Indeks " << column << " nieprawidlowy!" << std::endl;
     }
     else
     {
-        std::sort(this->database.begin(), this->database.end(),
-        [&column](const Data &one, const Data &two)
-        {
-            return (one.getValues()[column] < two.getValues()[column]);
-        });
+        auto sorter = std::bind(compareCol, 
+                            std::placeholders::_1, 
+                            std::placeholders::_2, 
+                            column);
+        std::sort(this->database.begin(), this->database.end(), sorter);
     }
     return *this;
 }
 
-Table Table::sortBy(bool (*function)(const Data &, const Data &))
+Table &Table::sortBy(std::function<bool(const Data &, const Data &)> sorter)
 {
-    std::sort(this->database.begin(), this->database.end(), function);
+    std::sort(this->database.begin(), this->database.end(), sorter);
     return *this;
+}
+
+bool compareCol(const Data& d1, const Data& d2, int column)
+{
+    return d1.getValues()[column] < d2.getValues()[column];
 }

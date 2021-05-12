@@ -4,20 +4,20 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <functional>
+#include <numeric>
 
 class Sum;
 
 class Data
 {
+    friend const Sum sumData(const Data &data);
 public:
     /** Konstruktor ustawiajacy nazwe i zbior wartosci
      * @param nazwa obiektu
      * @param wektor wartosci obiektu
      */
     Data(const std::string &name, std::vector<double> values);
-
-    /** Destruktor czyszczacy wektor wartosci*/
-    ~Data(); 
 
     /** Wypisywanie zawartosci obiektu*/
     void print() const;
@@ -26,9 +26,6 @@ public:
      * @return wektor typu std::vector<double> z wartosciami
      */
     std::vector<double> getValues() const;
-    friend const Sum sumData(const Data &data);
-
-
 private:
     /** Nazwa obiektu*/
     std::string name;

@@ -23,9 +23,11 @@ public:
      * @param wskaznik do funkcji bedacej komparatorem
      * @return tabela po posortowaniu
      */
-    Table sortBy(bool (*function)(const Data &, const Data &));
+    Table &sortBy(std::function<bool(const Data &, const Data &)> sorter);
 
 private:
     /** Wektor obiektow danych przechowujacych zbiory wartosci*/
     std::vector<Data> database;
 };
+
+bool compareCol(const Data& d1, const Data& d2, int column);
