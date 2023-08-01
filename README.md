@@ -1,10 +1,13 @@
-## Object-Oriented Programming 1
+# Object-oriented programming 1
 
-The code was written during EOM's labs using `repl.it` environment.  
-Semester 4, year 2021.
+Code written for Applied Computer Science **Object-oriented programming 1** course at [AGH UST](https://www.agh.edu.pl/en) [WFiIS](https://www.fis.agh.edu.pl/en/).
 
-### Useful utilities:
+Semester `4`, year `2021`.
+
+## Tools used during the course
+
 `Makefile`:
+
 ```make
 CXX = g++
 EXEC = main
@@ -30,6 +33,7 @@ check:
 ```
   
 `CMakeLists.txt`:
+
 ```cmake
 cmake_minimum_required(VERSION 3.1)
 project(CPPCMAKE)
@@ -76,4 +80,6 @@ add_executable(EXECUTABLE main.cpp)
 target_link_libraries(EXECUTABLE CPPLabSolution)
 ```
 
-Caveat emptor.
+## License
+
+Sources are licensed under MIT, a free and open-source license. For details, please see [the license file](LICENSE.md).
